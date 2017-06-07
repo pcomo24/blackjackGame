@@ -1,3 +1,4 @@
+//card class and methods
 function Card(name, suit) {
   this.name = name;
   this.suit = suit;
@@ -44,35 +45,61 @@ function Card(name, suit) {
       break;
   }
 }
-
-var deck = [];
-function createDeck() {
-  this.names = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king', 'ace'];
-  this.suits = ['hearts', 'diamonds', 'spades', 'clubs'];
-  for( var s = 0; s < this.suits.length; s++ ) {
-    for( var n = 0; n < this.names.length; n++ ) {
-      deck.push( new Card(this.names[n], this.suits[s]) );
-    }
-  }
-}
-createDeck();
-
 Card.prototype.getImageUrl = function() {
     return 'images/' + this.point + '_of_' + this.suit + '.svg'
 };
 
-var dealerHand = [];
-var playerHand = [];
+//Deck Class and Methods
+function Deck() {
+  this.dZeck = [];
+};
+Deck.prototype.create = function () {
+  this.names = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king', 'ace'];
+  this.suits = ['hearts', 'diamonds', 'spades', 'clubs'];
+  for( var s = 0; s < this.suits.length; s++ ) {
+    for( var n = 0; n < this.names.length; n++ ) {
+      this.dZeck.push( new Card(this.names[n], this.suits[s]) );
+    }
+  }
+}
+Deck.prototype.draw = function () {
+  return this.dZeck.card[0];
+  this.dZeck.shift();
+};
+Deck.prototype.shuffle = function (this.Dzeck) {
+  //pizzapanther shuffle.js
+  for (var i = this.Dzeck.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = this.Dzeck[i];
+        this.Dzeck[i] = this.Dzeck[j];
+        this.Dzeck[j] = temp;
+    };
+    return array;
+};
+
+//Hand class and Methods
+function Hand() {
+  this.cards = [];
+};
+
+Hand.prototype.getPoints = function() {
+  var handPoints = 0;
+  for (i = 0; i < this.cards.length; i++) {
+    handPoints += this.cards[i].point;
+  };
+  return handPoints;
+};
+var firstDeck = new Deck();
+dealerHand = new Hand()
+playerHand = new Hand()
+playerHand.cards = firstDeck.draw();
+dealerHand.cards = firstDeck.draw();
+
 
 function deal() {
   for ( var i = 0; i < 2; i++) {
-    //append top card object to playerHand array then delete from deck
-    playerHand.push( new card(deck[0].name, deck[0].suit) );
-    deck.shift();
-    //append top card object to dealerHand array then delete from deck
-    dealerHand.push( new card(deck[0].name, deck[0].suit) );
-    deck.shift();
-  }
+    playerHand.cards = firstDeck.draw();
+    dealerHand.cards = firstDeck.draw();  
   console.log(dealerHand);
   console.log(playerHand);
 }
